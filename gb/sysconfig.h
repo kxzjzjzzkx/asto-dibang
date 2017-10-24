@@ -39,10 +39,11 @@ string SQL_SUPPLIERS_BY_ICCODE	= "select top 1 * from suppliers where iccode = '
 string SQL_SUPPLIERS_BY_MOBILE = "select * from suppliers where mobile = '<MOBILE>' order by id desc";
 string SQL_SUPPLIERS_BY_CONTACT = "select * from suppliers where contact like '%<CONTACT>%' order by id desc";
 
-string SQL_SUPPLIERS_FOR_TOP1	= "select top 1 id from suppliers order by id desc";
-string SQL_SUPPLIERS_FOR_TOP1_ALL = "select top 1 * from suppliers order by id desc";
-string SQL_SUPPLIERS_FOR_UPLOAD = "select * from suppliers where gmt_modified >#<GMT_MODIFIED># and company_id=<COMPANY_ID>";
-string SQL_SUPPLIERS_BY_SELFID  = "select  count(0) as hasExist  from suppliers where selfid = '<SELFID>'";
+string SQL_SUPPLIERS_FOR_TOP1		= "select top 1 id from suppliers order by id desc";
+string SQL_SUPPLIERS_FOR_TOP1_ALL	= "select top 1 * from suppliers order by id desc";
+string SQL_SUPPLIERS_FOR_UPLOAD		= "select * from suppliers where gmt_modified >#<GMT_MODIFIED># and company_id=<COMPANY_ID>";
+string SQL_SUPPLIERS_BY_SELFID		= "select  count(0) as hasExist  from suppliers where selfid = '<SELFID>'";
+string SQL_SUPPLIERS_BY_CID			= "select * from suppliers where company_id=<COMPANY_ID>";
 
 string SQL_STORAGE_FOR_UPLOAD = "select * from storage where gmt_modified >#<GMT_MODIFIED># and company_id=<COMPANY_ID>";
 
@@ -88,3 +89,21 @@ string SQL_STORAGE_UPDATE_TO_TRADE_OVER_ONLINE =	"update `storage` set gmt_modif
 string SQL_STORAGE_UPDATE_TO_FAIL =					"update `storage` set gmt_modified = now(),status = 99 where id = <ID>";
 string SQL_EQSET_UPDATE =							"update eqset set eq_com = '<EQ_COM>' , eq_btl = '<EQ_BTL>' where eq_type = '<EQ_TYPE>' ";
 string SQL_UPDATE_LOG_MAXID_CHANGE =				"update update_log set maxid = <MAXID> where tablename = '<TABLENAME>'";
+
+
+/*
+	table listview head
+	表格，头部配置参数 
+*/
+
+// 选择供应商 表头 
+string LISTVIEW_TITLE_SUPPLIERS_CHOOSE[6] = { "序号","供货人编号","供货人","联系电话","供货商类型","地址" };
+int LISTVIEW_WIDTH_SUPPLIERS_CHOOSE[6] = { 60,60,90,60,60,150 };
+
+// 磅单界面，供应商表头 
+string LISTVIEW_TITLE_STORAGE_SUPPLIERS[6] = { "序号","供货人编号","供货人", "联系电话","供应商类型","地址" };
+int LISTVIEW_WIDTH_STORAGE_SUPPLIERS[6] = { 60, 120, 80, 100, 80, 160 };
+
+// 磅单界面， 过磅单列表表头 
+string LISTVIEW_TITLE_STORAGE_LIST[12] = { "序号", "磅", "供货人编号", "供货人", "进场时间", "毛重", "皮重", "品名", "单价", "净重", "总额", "状态" };
+int LISTVIEW_WIDTH_STORAGE_LIST[12] = { 60,60,90,60,120,50,50,60,60,80,80,80 };

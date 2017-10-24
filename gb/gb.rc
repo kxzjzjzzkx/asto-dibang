@@ -31,7 +31,7 @@ LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
 
 IDD_DIALOG_STORAGE DIALOGEX 0, 0, 683, 337
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "废料回收智能系统"
+CAPTION "再生资源智能管理系统-磅单管理"
 MENU IDR_MENU_STORAGE
 FONT 10, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
@@ -40,7 +40,7 @@ BEGIN
     PUSHBUTTON      "新建毛重",IDC_BUTTON_ST_COM,14,203,96,32
     PUSHBUTTON      "皮重",IDC_BUTTON_SC_COM,14,242,96,32,WS_DISABLED
     PUSHBUTTON      "现金结算",IDC_BUTTON_PAY,121,287,63,43,BS_BITMAP,WS_EX_LEFTSCROLLBAR
-    PUSHBUTTON      "定价",IDC_BUTTON_SET_MONEY,545,291,56,39
+    PUSHBUTTON      "定价",IDC_BUTTON_SET_MONEY,545,291,56,39,NOT WS_VISIBLE
     PUSHBUTTON      "线上积分结算",IDC_BUTTON_ONLINE_SCORE,208,288,58,42,NOT WS_VISIBLE,WS_EX_STATICEDGE
     GROUPBOX        "大磅",IDC_STATIC,9,5,106,130
     GROUPBOX        "小磅",IDC_STATIC,9,162,106,148
@@ -133,13 +133,13 @@ BEGIN
     PUSHBUTTON      "取消",IDCANCEL,252,156,50,14
 END
 
-IDD_DIALOG_SUPPLIERS_CHOOSE DIALOGEX 0, 0, 309, 177
+IDD_DIALOG_SUPPLIERS_CHOOSE DIALOGEX 0, 0, 509, 287
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Dialog"
+EXSTYLE WS_EX_TRANSPARENT
+CAPTION "选择供应商"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "确定",IDOK,198,156,50,14
-    PUSHBUTTON      "取消",IDCANCEL,252,156,50,14
+    CONTROL         "",IDC_LIST_SUPPLIERS_CHOOSE,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,7,487,265
 END
 
 IDD_DIALOG_SUPPLIERS_ADD DIALOGEX 0, 0, 309, 177
@@ -240,9 +240,9 @@ BEGIN
     IDD_DIALOG_SUPPLIERS_CHOOSE, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 302
+        RIGHTMARGIN, 502
         TOPMARGIN, 7
-        BOTTOMMARGIN, 170
+        BOTTOMMARGIN, 280
     END
 
     IDD_DIALOG_SUPPLIERS_ADD, DIALOG
@@ -254,18 +254,6 @@ BEGIN
     END
 END
 #endif    // APSTUDIO_INVOKED
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Icon
-//
-
-// Icon with lowest ID value placed first to ensure application icon
-// remains consistent on all systems.
-IDI_ICON2               ICON                    "logo.ico"
-
-IDI_ICON_MAIN           ICON                    "dibang128X128.ico"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -297,9 +285,9 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_GB                  ICON                    "logo.ico"
+IDI_GB                  ICON                    "dibang128X128.ico"
 
-IDI_SMALL               ICON                    "logo.ico"
+IDI_SMALL               ICON                    "dibang128X128.ico"
 
 
 /////////////////////////////////////////////////////////////////////////////
