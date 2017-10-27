@@ -35,9 +35,11 @@ string SQL_USERS_BY_UAP					= "select count(*) as hasExist from users where user
 string SQL_V_SUPPLIERS_FOR_NOPAY	= "select * from v_suppliers where ispay = 0 and company_id = <COMPANY_ID> order by id desc";
 string SQL_V_SUPPLIERS_FOR_PAY		= "select * from v_suppliers where ispay > 0 and company_id = <COMPANY_ID> order by id desc";
 
-string SQL_SUPPLIERS_BY_ICCODE	= "select top 1 * from suppliers where iccode = '<ICCODE>' order by id desc";
-string SQL_SUPPLIERS_BY_MOBILE = "select * from suppliers where mobile = '<MOBILE>' order by id desc";
-string SQL_SUPPLIERS_BY_CONTACT = "select * from suppliers where contact like '%<CONTACT>%' order by id desc";
+string SQL_SUPPLIERS_BY_ICCODE	= "select top 1 * from suppliers	where isdel=0 and company_id = <COMPANY_ID> and iccode = '<ICCODE>' order by id desc";
+string SQL_SUPPLIERS_BY_MOBILE	= "select * from suppliers			where isdel=0 and company_id = <COMPANY_ID> and mobile = '<MOBILE>' order by id desc";
+string SQL_SUPPLIERS_BY_CONTACT = "select * from suppliers			where isdel=0 and company_id = <COMPANY_ID> and contact like '%<CONTACT>%' order by id desc";
+string SQL_SUPPLIERS_FOR_PAGE	= "SELECT * FROM suppliers			where isdel=0 and company_id = <COMPANY_ID> <WHERECLAUSE> and id  between (select min(id) from(select top <MIN> id from suppliers where  isdel = 0 and company_id = <COMPANY_ID> <WHERECLAUSE> order by id desc)) and (select min(id) from(select top <MAX> id from suppliers where isdel = 0 and company_id = <COMPANY_ID> <WHERECLAUSE> order by id desc)) order by id desc";
+string SQL_SUPPLIERS_FOR_PAGE_COUNT = "SELECT count(0) as total_records FROM suppliers where isdel = 0 and company_id = <COMPANY_ID> <WHERECLAUSE> ";
 
 string SQL_SUPPLIERS_FOR_TOP1		= "select top 1 id from suppliers order by id desc";
 string SQL_SUPPLIERS_FOR_TOP1_ALL	= "select top 1 * from suppliers order by id desc";
@@ -72,7 +74,8 @@ string SQL_COMPANY_CTYPE_BY_ID				= "select ctype from company where id = <ID>";
 insert
 */
 string SQL_STORAGE_INSERT			= "INSERT INTO `storage` (`selfid`,`group_id`,`company_id`,`code`,`suppliers_selfid`,`gw`,`status`,`price_users_selfid`,`ispay`,`eqtype`) VALUES ('<SELFID>',<GROUP_ID>,<COMPANY_ID>,'<CODE>','<SUPPLIERS_SELFID>',<GW>,<STATUS>,'<PRICE_USERS_SELFID>',<ISPAY>,'<EQTYPE>')";
-string SQL_SUPPLIERS_INSERT			= "INSERT INTO `suppliers`(`selfid`,`iccode`,`name`,`contact`,`company_id`,`group_id`,`ctype`) VALUES('<SELFID>','<ICCODE>','<NAME>','<CONTACT>','<COMPANY_ID>',<GROUP_ID>,<CTYPE>)";
+string SQL_SUPPLIERS_INSERT_GUEST	= "INSERT INTO `suppliers`(`selfid`,`iccode`,`name`,`contact`,`company_id`,`group_id`,`ctype`,`isdel`) VALUES('<SELFID>','<ICCODE>','<NAME>','<CONTACT>','<COMPANY_ID>',<GROUP_ID>,<CTYPE>,0)";
+string SQL_SUPPLIERS_INSERT_ALL		= "INSERT INTO `suppliers`(`selfid`,`iccode`,`name`,`contact`,`company_id`,`group_id`,`ctype`,`htype`,`mobile`,`address`,`bz`,`isdel`) VALUES('<SELFID>','<ICCODE>','<NAME>','<CONTACT>','<COMPANY_ID>',<GROUP_ID>,<CTYPE>,'<HTYPE>','<MOBILE>','<ADDRESS>','<BZ>',0)";
 string SQL_USERS_INSERT				= "INSERT INTO  users (selfid,group_id,company_id,clientid,username,pwd) VALUES ('<SELFID>',<GROUP_ID>,<COMPANY_ID>,'<CLIENTID>','<USERNAME>','<PWD>')";
 string SQL_PRODUCTS_INSERT			= "INSERT INTO `products`(`selfid`,`group_id`,`company_id`,`name`,`name_py`,`category_selfid`,`spec`,`unit`,`stock`,`bz`)VALUES ('<SELFID>',<GROUP_ID>,<COMPANY_ID>,'<NAME>','<NAME_PY>','<CATEGORY_SELFID>','<SPEC>','<UNIT>',<STOCK>,'<BZ>')";
 string SQL_CATEGORY_PRODUCTS_INSERT = "INSERT INTO `category_products`(`selfid`,`sub_selfid`,`company_id`,`name`) VALUES ('<SELFID>','<SUB_SELFID>',<COMPANY_ID>,'<NAME>')";
@@ -87,9 +90,13 @@ string SQL_STORAGE_UPDATE_TO_WEIGHT_OVER =			"update `storage` set gmt_modified 
 string SQL_STORAGE_UPDATE_TO_TRADE_OVER =			"update `storage` set gmt_modified = now(),status = 4,pay_time = now(),ispay=1 , pay_users_selfid = '<PAY_USERS_SELFID>' where id = <ID>";
 string SQL_STORAGE_UPDATE_TO_TRADE_OVER_ONLINE =	"update `storage` set gmt_modified = now(),status = 4,pay_time = now(),ispay=2 , pay_users_selfid = '<PAY_USERS_SELFID>' where id = <ID>";
 string SQL_STORAGE_UPDATE_TO_FAIL =					"update `storage` set gmt_modified = now(),status = 99 where id = <ID>";
+
 string SQL_EQSET_UPDATE =							"update eqset set eq_com = '<EQ_COM>' , eq_btl = '<EQ_BTL>' where eq_type = '<EQ_TYPE>' ";
+
 string SQL_UPDATE_LOG_MAXID_CHANGE =				"update update_log set maxid = <MAXID> where tablename = '<TABLENAME>'";
 
+string SQL_SUPPLIERS_TO_DEL_BY_IC =					"update suppliers set gmt_modified=now(),isdel=1 where iccode='<ICCODE>'";
+string SQL_SUPPLIERS_FOR_EDIT =						"update suppliers set gmt_modified=now(),ctype=<CTYPE>,name='<NAME>',htype='<HTYPE>',contact='<CONTACT>',mobile='<MOBILE>',address='<ADDRESS>',bz='<BZ>' where iccode= '<ICCODE>'";
 
 /*
 	table listview head
@@ -107,3 +114,7 @@ int LISTVIEW_WIDTH_STORAGE_SUPPLIERS[6] = { 60, 120, 80, 100, 80, 160 };
 // 磅单界面， 过磅单列表表头 
 string LISTVIEW_TITLE_STORAGE_LIST[12] = { "序号", "磅", "供货人编号", "供货人", "进场时间", "毛重", "皮重", "品名", "单价", "净重", "总额", "状态" };
 int LISTVIEW_WIDTH_STORAGE_LIST[12] = { 60,60,90,60,120,50,50,60,60,80,80,80 };
+
+// 供应商管理界面列表 表头
+string LISTVIEW_TITLE_SUPPLIERS_LIST[9] = { "公司类型","IC编号","公司名称","合作关系","联系人","手机号码","地址","备注","添加时间" };
+int LISTVIEW_WIDTH_SUPPLIERS_LIST[9] = { 65,130,80,65 ,70 ,100 ,120 ,80 ,150 };

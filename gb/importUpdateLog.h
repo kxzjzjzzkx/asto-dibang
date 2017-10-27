@@ -149,7 +149,7 @@ void insertForSuppliers(Json::Value value) {
 			continue;
 		}
 		//string SQL_SUPPLIERS_INSERT = "INSERT INTO `suppliers`(`selfid`,`iccode`,`name`,`contact`,`company_id`,`group_id`,`ctype`) VALUES('<SELFID>','<ICCODE>','<NAME>','<CONTACT>','<COMPANY_ID>','<GROUP_ID>',<CTYPE>)";
-		sqlString = SQL_SUPPLIERS_INSERT;
+		sqlString = SQL_SUPPLIERS_INSERT_GUEST;
 		sqlString = sqlString.replace(sqlString.find("<SELFID>"), 8, selfid);
 		string iccode = value["list"][i]["iccode"].asString();
 		sqlString = sqlString.replace(sqlString.find("<ICCODE>"), 8, iccode);

@@ -66,6 +66,30 @@ void convertStrToUnChar(char* str, unsigned char* UnChar)
 	return;
 }
 
+
+void breakVoice(char* result, bool* hasRead, char* errorMsg) {
+	unsigned char(__stdcall *idr_beep)(unsigned long xms);
+	//判断动态库是否存在
+	char filePath[200];
+	GetModuleFileName(NULL, filePath, 200);
+	string FileName = filePath;
+	FileName = FileName.replace(FileName.find("gb.exe"), 6, "");
+	FileName += "OUR_MIFARE.dll";
+	WIN32_FIND_DATA wfd;
+	HANDLE hFind = FindFirstFile(FileName.c_str(), &wfd);
+	if (INVALID_HANDLE_VALUE == hFind)
+	{
+		return;
+	}
+	FindClose(hFind);
+	//提取函数
+	HINSTANCE hDll;
+	hDll = LoadLibrary(FileName.c_str());
+	idr_beep = (unsigned char(__stdcall *)(unsigned long))GetProcAddress(hDll, "pcdbeep");
+	idr_beep(50);
+	FreeLibrary(hDll);
+}
+
 void ReadICCard(char* result,bool* hasRead,char* errorMsg) {
 	unsigned char status;//存放返回值
 	unsigned char myareano;//区号
@@ -76,6 +100,7 @@ void ReadICCard(char* result,bool* hasRead,char* errorMsg) {
 	unsigned char mypiccdata[48]; //卡数据缓冲
 	unsigned char(__stdcall *piccreadex)(unsigned char ctrlword, unsigned char *serial, unsigned char area, unsigned char keyA1B0, unsigned char *picckey, unsigned char *piccdata0_2);
 	//判断动态库是否存在
+	hasRead[0] = false;
 	char filePath[200];
 	GetModuleFileName(NULL, filePath, 200);
 	string FileName = filePath;
@@ -110,7 +135,6 @@ void ReadICCard(char* result,bool* hasRead,char* errorMsg) {
 	mypicckey[5] = 0xff;
 	status = piccreadex(myctrlword, mypiccserial, myareano, authmode, mypicckey, mypiccdata);
 	FreeLibrary(hDll);
-	hasRead[0] = false;
 	//在下面设定断点，然后查看mypiccserial、mypiccdata，
 	//调用完 piccreadex函数可读出卡序列号到 mypiccserial，读出卡数据到mypiccdata，
 	//开发人员根据自己的需要处理mypiccserial、mypiccdata 中的数据了。
@@ -139,6 +163,103 @@ void ReadICCard(char* result,bool* hasRead,char* errorMsg) {
 	#define ERR_AUTHKEY 12//密码认证错误
 	#define ERR_READ 13//读卡错误
 	#define ERR_WRITE 14//写卡错误
+	#define ERR_NONEDLL 21//没有动态库
+	#define ERR_DRIVERORDLL 22//动态库或驱动程序异常
+	#define ERR_DRIVERNULL 23//驱动程序错误或尚未安装
+	#define ERR_TIMEOUT 24//操作超时，一般是动态库没有反映
+	#define ERR_TXSIZE 25//发送字数不够
+	#define ERR_TXCRC 26//发送的CRC错
+	#define ERR_RXSIZE 27//接收的字数不够
+	#define ERR_RXCRC 28//接收的CRC错
+	*/
+}
+
+void WriteICCard(char* result, bool* hasWrite, char* errorMsg) {
+	int i;
+	unsigned char status;//存放返回值
+	unsigned char myareano;//区号
+	unsigned char authmode;//密码类型，用A密码或B密码
+	unsigned char myctrlword;//控制字
+	unsigned char mypicckey[6];//密码
+	unsigned char mypiccserial[4];//卡序列号
+	unsigned char mypiccdata[48]; //卡数据缓冲
+
+	unsigned char(__stdcall *piccwriteex)(unsigned char ctrlword, unsigned char *serial, unsigned char area, unsigned char keyA1B0, unsigned char *picckey, unsigned char *piccdata0_2);
+	//判断动态库是否存在
+	hasWrite[0] = false;
+	char filePath[200];
+	GetModuleFileName(NULL, filePath, 200);
+	string FileName = filePath;
+	FileName = FileName.replace(FileName.find("gb.exe"), 6, "");
+	FileName += "OUR_MIFARE.dll";
+	WIN32_FIND_DATA wfd;
+	HANDLE hFind = FindFirstFile(FileName.c_str(), &wfd);
+	if (INVALID_HANDLE_VALUE == hFind)
+	{
+		sprintf(errorMsg, "%s", "OUR_MIFARE.dll文件丢失");
+		//MessageBox(NULL, TEXT("OUR_MIFARE.dll文件丢失"), TEXT("错误"), NULL);
+		return;
+	}
+	FindClose(hFind);
+	//提取函数
+	HINSTANCE hDll;
+	hDll = LoadLibrary(FileName.c_str());
+	piccwriteex = (unsigned char(__stdcall *)(unsigned char, unsigned char *, unsigned char, unsigned char, unsigned char *, unsigned char *))GetProcAddress(hDll, "piccwriteex");
+	//控制字指定,控制字的含义请查看本公司网站提供的动态库说明
+	myctrlword = BLOCK0_EN + BLOCK1_EN + BLOCK2_EN + EXTERNKEY;
+
+	//指定区号
+	myareano = 8;//指定为第8区
+				 //批定密码模式
+	authmode = 1;//大于0表示用A密码认证，推荐用A密码认证
+
+				 //指定密码
+	mypicckey[0] = 0xff;
+	mypicckey[1] = 0xff;
+	mypicckey[2] = 0xff;
+	mypicckey[3] = 0xff;
+	mypicckey[4] = 0xff;
+	mypicckey[5] = 0xff;
+
+	//指定卡数据
+	for (i = 0; i<16; i++)
+	{
+		mypiccdata[i] = result[i];
+	}
+	//convertStrToUnChar(result, mypiccdata);
+	//写卡
+	status = piccwriteex(myctrlword, mypiccserial, myareano, authmode, mypicckey, mypiccdata);
+
+	FreeLibrary(hDll);
+	//在下面设定断点，然后查看mypiccserial、mypiccdata，
+	//调用完 piccreadex函数可读出卡序列号到 mypiccserial，读出卡数据到mypiccdata，
+	//开发人员根据自己的需要处理mypiccserial、mypiccdata 中的数据了。
+	//处理返回函数
+	switch (status)
+	{
+	case 0:
+		//ShowMessage("操作成功");
+		hasWrite[0] = true;
+		break;
+		//......
+	case 8:
+		//ShowMessage("请将卡放在感应区");
+		break;
+
+
+	}
+
+
+	//返回解释
+	/*
+	#define ERR_REQUEST 8//寻卡错误
+	#define ERR_READSERIAL 9//读序列吗错误
+	#define ERR_SELECTCARD 10//选卡错误
+	#define ERR_LOADKEY 11//装载密码错误
+	#define ERR_AUTHKEY 12//密码认证错误
+	#define ERR_READ 13//读卡错误
+	#define ERR_WRITE 14//写卡错误
+
 	#define ERR_NONEDLL 21//没有动态库
 	#define ERR_DRIVERORDLL 22//动态库或驱动程序异常
 	#define ERR_DRIVERNULL 23//驱动程序错误或尚未安装

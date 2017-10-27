@@ -21,6 +21,19 @@ void getTotalPrice(char* gw, char* tare,char* nw,char* price,char* totalPrice)
 	totalMoney = round(totalMoney * 100) / 100;
 	sprintf(totalPrice, "%f", totalMoney);
 }
+
+void bulidNewIccode(char* iccode) {
+	time_t tt = time(NULL);//这句返回的只是一个时间戳
+	tm* t = localtime(&tt);
+	int randInt = (rand() % 90) + 10;
+	sprintf(iccode, "%d%02d%02d%02d%02d%02d%d",
+		t->tm_year + 1900,
+		t->tm_mon + 1,
+		t->tm_mday,
+		t->tm_hour,
+		t->tm_min,
+		t->tm_sec, randInt);
+}
 //
 ///*
 //	初始化 com端口数据的读取准备
