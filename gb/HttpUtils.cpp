@@ -129,20 +129,20 @@ int HttpUtils::httpPost(_TCHAR* domain,_TCHAR* url,_TCHAR* data){
     }
 
     BOOL bo = HttpSendRequestA(HttpOpen, _HTTP_ARAC, strlen(_HTTP_ARAC), data, strlen (data));  //向网站服务器发送请求HTTP协议和POST请求数据
-    if(bo == false){
+    //if(bo == false){
         InternetCloseHandle(Inte);
         InternetCloseHandle(Connect);
         InternetCloseHandle(HttpOpen);
         //cout << "error HttpSendRequest" << endl;
-    }
-    DWORD y = 0;
-     if(!InternetReadFile (HttpOpen, _HTTP_File, 1024, &y)){    //获取HTTP响应消息
-        InternetCloseHandle(Inte);
-        InternetCloseHandle(Connect);
-        InternetCloseHandle(HttpOpen);
-        //cout << "error InternetReadFile" << endl;
-    }else{
-        //printf("%s",_HTTP_File);    //打印得到的响应消息
-    }
+    //}
+    //DWORD y = 0;
+    // if(!InternetReadFile (HttpOpen, _HTTP_File, 1024, &y)){    //获取HTTP响应消息
+    //    InternetCloseHandle(Inte);
+    //    InternetCloseHandle(Connect);
+    //    InternetCloseHandle(HttpOpen);
+    //    //cout << "error InternetReadFile" << endl;
+    //}else{
+    //    //printf("%s",_HTTP_File);    //打印得到的响应消息
+    //}
 	return 0;
 }

@@ -223,6 +223,7 @@ void systemDataInit() {
 		}
 		db.HX_pRecordset->MoveNext();
 	}
+	db.ExitConnect();
 
 }
 
@@ -315,6 +316,7 @@ string bulidUploadSuppliersData(DBUtils db) {
 		uploadData = bulidUploadColumn("bz", db, uploadData);
 		uploadData = bulidUploadColumn("gmt_created", db, uploadData);
 		uploadData = bulidUploadColumn("gmt_modified", db, uploadData);
+		uploadData = bulidUploadColumn("isdel", db, uploadData);
 		uploadData = uploadData + "$";
 		db.HX_pRecordset->MoveNext();
 	}

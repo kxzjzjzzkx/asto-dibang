@@ -40,12 +40,11 @@ string SQL_SUPPLIERS_BY_MOBILE	= "select * from suppliers			where isdel=0 and co
 string SQL_SUPPLIERS_BY_CONTACT = "select * from suppliers			where isdel=0 and company_id = <COMPANY_ID> and contact like '%<CONTACT>%' order by id desc";
 string SQL_SUPPLIERS_FOR_PAGE	= "SELECT * FROM suppliers			where isdel=0 and company_id = <COMPANY_ID> <WHERECLAUSE> and id  between (select min(id) from(select top <MIN> id from suppliers where  isdel = 0 and company_id = <COMPANY_ID> <WHERECLAUSE> order by id desc)) and (select min(id) from(select top <MAX> id from suppliers where isdel = 0 and company_id = <COMPANY_ID> <WHERECLAUSE> order by id desc)) order by id desc";
 string SQL_SUPPLIERS_FOR_PAGE_COUNT = "SELECT count(0) as total_records FROM suppliers where isdel = 0 and company_id = <COMPANY_ID> <WHERECLAUSE> ";
-
 string SQL_SUPPLIERS_FOR_TOP1		= "select top 1 id from suppliers order by id desc";
 string SQL_SUPPLIERS_FOR_TOP1_ALL	= "select top 1 * from suppliers order by id desc";
 string SQL_SUPPLIERS_FOR_UPLOAD		= "select * from suppliers where gmt_modified >#<GMT_MODIFIED># and company_id=<COMPANY_ID>";
 string SQL_SUPPLIERS_BY_SELFID		= "select  count(0) as hasExist  from suppliers where selfid = '<SELFID>'";
-string SQL_SUPPLIERS_BY_CID			= "select * from suppliers where company_id=<COMPANY_ID>";
+string SQL_SUPPLIERS_BY_CID			= "select * from suppliers where company_id=<COMPANY_ID> order by id desc";
 
 string SQL_STORAGE_FOR_UPLOAD = "select * from storage where gmt_modified >#<GMT_MODIFIED># and company_id=<COMPANY_ID>";
 
@@ -75,7 +74,7 @@ insert
 */
 string SQL_STORAGE_INSERT			= "INSERT INTO `storage` (`selfid`,`group_id`,`company_id`,`code`,`suppliers_selfid`,`gw`,`status`,`price_users_selfid`,`ispay`,`eqtype`) VALUES ('<SELFID>',<GROUP_ID>,<COMPANY_ID>,'<CODE>','<SUPPLIERS_SELFID>',<GW>,<STATUS>,'<PRICE_USERS_SELFID>',<ISPAY>,'<EQTYPE>')";
 string SQL_SUPPLIERS_INSERT_GUEST	= "INSERT INTO `suppliers`(`selfid`,`iccode`,`name`,`contact`,`company_id`,`group_id`,`ctype`,`isdel`) VALUES('<SELFID>','<ICCODE>','<NAME>','<CONTACT>','<COMPANY_ID>',<GROUP_ID>,<CTYPE>,0)";
-string SQL_SUPPLIERS_INSERT_ALL		= "INSERT INTO `suppliers`(`selfid`,`iccode`,`name`,`contact`,`company_id`,`group_id`,`ctype`,`htype`,`mobile`,`address`,`bz`,`isdel`) VALUES('<SELFID>','<ICCODE>','<NAME>','<CONTACT>','<COMPANY_ID>',<GROUP_ID>,<CTYPE>,'<HTYPE>','<MOBILE>','<ADDRESS>','<BZ>',0)";
+string SQL_SUPPLIERS_INSERT_ALL		= "INSERT INTO `suppliers`(`selfid`,`iccode`,`name`,`contact`,`company_id`,`group_id`,`ctype`,`htype`,`mobile`,`address`,`bz`,`isdel`) VALUES('<SELFID>','<ICCODE>','<NAME>','<CONTACT>',<COMPANY_ID>,<GROUP_ID>,<CTYPE>,<HTYPE>,'<MOBILE>','<ADDRESS>','<BZ>',0)";
 string SQL_USERS_INSERT				= "INSERT INTO  users (selfid,group_id,company_id,clientid,username,pwd) VALUES ('<SELFID>',<GROUP_ID>,<COMPANY_ID>,'<CLIENTID>','<USERNAME>','<PWD>')";
 string SQL_PRODUCTS_INSERT			= "INSERT INTO `products`(`selfid`,`group_id`,`company_id`,`name`,`name_py`,`category_selfid`,`spec`,`unit`,`stock`,`bz`)VALUES ('<SELFID>',<GROUP_ID>,<COMPANY_ID>,'<NAME>','<NAME_PY>','<CATEGORY_SELFID>','<SPEC>','<UNIT>',<STOCK>,'<BZ>')";
 string SQL_CATEGORY_PRODUCTS_INSERT = "INSERT INTO `category_products`(`selfid`,`sub_selfid`,`company_id`,`name`) VALUES ('<SELFID>','<SUB_SELFID>',<COMPANY_ID>,'<NAME>')";
@@ -105,7 +104,7 @@ string SQL_SUPPLIERS_FOR_EDIT =						"update suppliers set gmt_modified=now(),ct
 
 // 选择供应商 表头 
 string LISTVIEW_TITLE_SUPPLIERS_CHOOSE[6] = { "序号","供货人编号","供货人","联系电话","供货商类型","地址" };
-int LISTVIEW_WIDTH_SUPPLIERS_CHOOSE[6] = { 60,60,90,60,60,150 };
+int LISTVIEW_WIDTH_SUPPLIERS_CHOOSE[6] = { 60,90,120,90,90,180 };
 
 // 磅单界面，供应商表头 
 string LISTVIEW_TITLE_STORAGE_SUPPLIERS[6] = { "序号","供货人编号","供货人", "联系电话","供应商类型","地址" };
