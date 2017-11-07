@@ -44,6 +44,7 @@ string SQL_SUPPLIERS_FOR_TOP1		= "select top 1 id from suppliers order by id des
 string SQL_SUPPLIERS_FOR_TOP1_ALL	= "select top 1 * from suppliers order by id desc";
 string SQL_SUPPLIERS_FOR_UPLOAD		= "select * from suppliers where gmt_modified >#<GMT_MODIFIED># and company_id=<COMPANY_ID>";
 string SQL_SUPPLIERS_BY_SELFID		= "select  count(0) as hasExist  from suppliers where selfid = '<SELFID>'";
+string SQL_SUPPLIERS_ICCODE_BY_SELFID = "select iccode from suppliers where selfid = '<SELFID>'";
 string SQL_SUPPLIERS_BY_CID			= "select * from suppliers where company_id=<COMPANY_ID> order by id desc";
 
 string SQL_STORAGE_FOR_UPLOAD = "select * from storage where gmt_modified >#<GMT_MODIFIED># and company_id=<COMPANY_ID>";
@@ -92,9 +93,11 @@ update
 */
 string SQL_STORAGE_UPDATE_TO_PRICE_OVER =			"update `storage` set gmt_modified = now(),status = 2,price_time = <PRICE_TIME>,price=<PRICE>,products_selfid = '<PRODUCTS_SELFID>',price_users_selfid = '<PRICE_USERS_SELFID>' ,total=<TOTAL> where id = <ID>";
 string SQL_STORAGE_UPDATE_TO_WEIGHT_OVER =			"update `storage` set gmt_modified = now(),status = 3,tare_check=1,nw=<NW>,total=<TOTAL>,tare=<TARE> where id = <ID>";
+string SQL_STORAGE_UPDATE_TO_WEIGHT_OVER_BY_CODE =	"update `storage` set gmt_modified = now(),status = 3,tare_check=1,nw=<NW>,total=<TOTAL>,tare=<TARE> where code = '<CODE>'";
 string SQL_STORAGE_UPDATE_TO_TRADE_OVER =			"update `storage` set gmt_modified = now(),status = 4,pay_time = now(),ispay=1 , pay_users_selfid = '<PAY_USERS_SELFID>' where id = <ID>";
 string SQL_STORAGE_UPDATE_TO_TRADE_OVER_ONLINE =	"update `storage` set gmt_modified = now(),status = 4,pay_time = now(),ispay=2 , pay_users_selfid = '<PAY_USERS_SELFID>' where id = <ID>";
 string SQL_STORAGE_UPDATE_TO_FAIL =					"update `storage` set gmt_modified = now(),status = 99 where id = <ID>";
+string SQL_STORAGE_UPDATE_FOR_SINGLE_BY_CODE =		"update `storage` set gmt_modified = now(),licence = '<LICENCE>',price=<PRICE>,bz='<BZ>',stype='<STYPE>' where code = '<CODE>'";
 
 string SQL_EQSET_UPDATE =							"update eqset set eq_com = '<EQ_COM>' , eq_btl = '<EQ_BTL>' where eq_type = '<EQ_TYPE>' ";
 
