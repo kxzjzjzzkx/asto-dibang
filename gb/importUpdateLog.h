@@ -8,7 +8,7 @@
 
 void insert(string sqlString) {
 	DBUtils db;
-	char sql[200];
+	char sql[500];
 	memset(sql, 0, 200);
 	strcpy(sql, sqlString.c_str());
 	db.addRecord(sql);
@@ -243,7 +243,6 @@ string bulidUploadStorageData(DBUtils db) {
 	while (!db.HX_pRecordset->adoEOF)
 	{
 		string strValue;
-		// selfid group_id company_id code products_selfid suppliers_selfid
 		_variant_t var = db.HX_pRecordset->GetCollect("selfid");
 		if (var.vt != VT_NULL) {
 			strValue = _com_util::ConvertBSTRToString((_bstr_t)var);
@@ -259,6 +258,8 @@ string bulidUploadStorageData(DBUtils db) {
 		}
 		uploadData = bulidUploadColumn("group_id", db, uploadData);
 		uploadData = bulidUploadColumn("company_id", db, uploadData);
+		uploadData = bulidUploadColumn("stype", db, uploadData);
+		uploadData = bulidUploadColumn("licence", db, uploadData);
 		uploadData = bulidUploadColumn("code", db, uploadData);
 		uploadData = bulidUploadColumn("products_selfid", db, uploadData);
 		uploadData = bulidUploadColumn("suppliers_selfid", db, uploadData);
@@ -277,7 +278,10 @@ string bulidUploadStorageData(DBUtils db) {
 		uploadData = bulidUploadColumn("pay_time", db, uploadData);
 		uploadData = bulidUploadColumn("pay_users_selfid", db, uploadData);
 		uploadData = bulidUploadColumn("gmt_created", db, uploadData);
+		uploadData = bulidUploadColumn("bz", db, uploadData);
 		uploadData = bulidUploadColumn("gmt_modified", db, uploadData);
+		uploadData = bulidUploadColumn("eqtype", db, uploadData);
+
 		uploadData = uploadData + "$";
 		db.HX_pRecordset->MoveNext();
 	}

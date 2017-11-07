@@ -177,6 +177,24 @@
     <Image Include="dibang128X128.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="single-nw.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="single-nw.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="gb.rc">
