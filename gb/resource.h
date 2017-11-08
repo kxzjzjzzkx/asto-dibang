@@ -139,7 +139,7 @@
 #define IDC_BUTTON19                    1117
 #define IDC_COMBO_SEARCH_STATUS         1117
 #define IDC_BUTTON9                     1118
-#define IDC_BUTTON10                    1119
+#define IDC_BUTTON_SINGLE_FAIL          1119
 #define IDC_STATIC_KK2                  1120
 #define IDC_BUTTON20                    1120
 #define IDC_STATIC_SEARCH_BAR_TIME      1121

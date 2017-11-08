@@ -97,7 +97,8 @@ string SQL_STORAGE_UPDATE_TO_WEIGHT_OVER_BY_CODE =	"update `storage` set gmt_mod
 string SQL_STORAGE_UPDATE_TO_TRADE_OVER =			"update `storage` set gmt_modified = now(),status = 4,pay_time = now(),ispay=1 , pay_users_selfid = '<PAY_USERS_SELFID>' where id = <ID>";
 string SQL_STORAGE_UPDATE_TO_TRADE_OVER_ONLINE =	"update `storage` set gmt_modified = now(),status = 4,pay_time = now(),ispay=2 , pay_users_selfid = '<PAY_USERS_SELFID>' where id = <ID>";
 string SQL_STORAGE_UPDATE_TO_FAIL =					"update `storage` set gmt_modified = now(),status = 99 where id = <ID>";
-string SQL_STORAGE_UPDATE_FOR_SINGLE_BY_CODE =		"update `storage` set gmt_modified = now(),licence = '<LICENCE>',price=<PRICE>,bz='<BZ>',stype='<STYPE>' where code = '<CODE>'";
+string SQL_STORAGE_UPDATE_FOR_SINGLE_BY_CODE =		"update `storage` set gmt_modified = now(),licence = '<LICENCE>',price=<PRICE>,total=<TOTAL>,bz='<BZ>',stype='<STYPE>',suppliers_selfid='<SUPPLIERS_SELFID>',products_selfid = '<PRODUCTS_SELFID>' where code = '<CODE>'";
+string SQL_STORAGE_UPDATE_TO_FAIL_BY_CODE=			"update `storage` set gmt_modified = now(),status = 99,isdel=1 where code = '<CODE>'";
 
 string SQL_EQSET_UPDATE =							"update eqset set eq_com = '<EQ_COM>' , eq_btl = '<EQ_BTL>' where eq_type = '<EQ_TYPE>' ";
 
