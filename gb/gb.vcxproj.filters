@@ -134,6 +134,9 @@
     <ClInclude Include="ICService.h">
       <Filter>Header Files\service</Filter>
     </ClInclude>
+    <ClInclude Include="HCNetSDK.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resource.hm">
@@ -208,5 +211,6 @@
     <Library Include="..\..\jsoncpp-src-0.5.0\build\vs71\release\lib_json\json_vc71_libmt.lib" />
     <Library Include="..\..\jsoncpp-src-0.5.0\build\vs71\debug\lib_json\json1.lib" />
     <Library Include="skin++\lib\SkinPPWTL.lib" />
+    <Library Include="C:\Users\Think\Desktop\孔\秘密花园\CH-HCNetSDK(Windows32)V5.3.1.20_build20170820\库文件\HCNetSDK.lib" />
   </ItemGroup>
 </Project>

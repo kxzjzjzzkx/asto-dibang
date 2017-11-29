@@ -1,4 +1,4 @@
-// stdafx.h : include file for standard system include files,
+﻿// stdafx.h : include file for standard system include files,
 // or project specific include files that are used frequently, but
 // are changed infrequently
 //
@@ -25,4 +25,4 @@
 
 #include "DBUtils.h"
 
-// TODO: reference additional headers your program requires here
+// TODO: reference additional headers your program requires her e

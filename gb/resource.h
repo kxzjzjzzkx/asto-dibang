@@ -138,7 +138,7 @@
 #define IDC_COMBO_SEARCH_SIZE           1117
 #define IDC_BUTTON19                    1117
 #define IDC_COMBO_SEARCH_STATUS         1117
-#define IDC_BUTTON9                     1118
+#define IDC_BUTTON_SINGLE_REFRESH       1118
 #define IDC_BUTTON_SINGLE_FAIL          1119
 #define IDC_STATIC_KK2                  1120
 #define IDC_BUTTON20                    1120
@@ -160,17 +160,15 @@
 #define IDC_EDIT_PLATE_NUMBER           1134
 #define IDC_BUTTON_CHOOSE_PLATE_NUMBER  1135
 #define IDC_BUTTON34                    1136
-#define IDC_BUTTON35                    1137
-#define IDC_BUTTON36                    1138
+#define IDC_STATIC_SINGLE_GWT           1137
 #define IDC_DATETIMEPICKER_SINGLE_TO    1138
-#define IDC_BUTTON37                    1139
 #define IDC_DATETIMEPICKER_SINGLE_FROM  1139
-#define IDC_BUTTON38                    1140
-#define IDC_BUTTON39                    1141
-#define IDC_BUTTON40                    1142
-#define IDC_BUTTON41                    1143
-#define IDC_BUTTON42                    1144
-#define IDC_BUTTON43                    1145
+#define IDC_STATIC_SINGLE_NWT           1140
+#define IDC_STATIC_SINGLE_TOTALT        1141
+#define IDC_STATIC_VIDEO_1              1142
+#define IDC_STATIC_VIDEO_2              1143
+#define IDC_STATIC_VIDEO_3              1144
+#define IDC_STATIC_VIDEO_4              1145
 #define IDC_BUTTON44                    1146
 #define IDC_BUTTON45                    1147
 #define IDC_BUTTON46                    1148
@@ -266,7 +264,7 @@
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        162
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1137
+#define _APS_NEXT_CONTROL_VALUE         1143
 #define _APS_NEXT_SYMED_VALUE           111
 #endif
 #endif
