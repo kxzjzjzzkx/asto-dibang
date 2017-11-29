@@ -160,6 +160,7 @@
     <ClInclude Include="users.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="C:\Users\Think\source\repos\EasyPR\EasyPR.sln" />
     <None Include="dibang.mdb" />
     <None Include="resource.hm" />
   </ItemGroup>

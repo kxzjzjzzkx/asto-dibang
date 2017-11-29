@@ -4,6 +4,8 @@ VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gb", "gb\gb.vcxproj", "{DBD747E4-A82D-42E1-AEBE-3BD4C8E3644F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libeasypr", "C:\Users\Think\source\repos\EasyPR\vcprojs\libeasypr.vcxproj", "{2791E339-04FB-44EF-9F92-C90131FE7772}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -24,6 +26,18 @@ Global
 		{DBD747E4-A82D-42E1-AEBE-3BD4C8E3644F}.Release|Win32.ActiveCfg = Release|Win32
 		{DBD747E4-A82D-42E1-AEBE-3BD4C8E3644F}.Release|Win32.Build.0 = Release|Win32
 		{DBD747E4-A82D-42E1-AEBE-3BD4C8E3644F}.Release|x64.ActiveCfg = Release|Win32
+		{2791E339-04FB-44EF-9F92-C90131FE7772}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2791E339-04FB-44EF-9F92-C90131FE7772}.Debug|Win32.Build.0 = Debug|Win32
+		{2791E339-04FB-44EF-9F92-C90131FE7772}.Debug|x64.ActiveCfg = Debug|x64
+		{2791E339-04FB-44EF-9F92-C90131FE7772}.Debug|x64.Build.0 = Debug|x64
+		{2791E339-04FB-44EF-9F92-C90131FE7772}.dummy|Win32.ActiveCfg = Debug|Win32
+		{2791E339-04FB-44EF-9F92-C90131FE7772}.dummy|Win32.Build.0 = Debug|Win32
+		{2791E339-04FB-44EF-9F92-C90131FE7772}.dummy|x64.ActiveCfg = Debug|x64
+		{2791E339-04FB-44EF-9F92-C90131FE7772}.dummy|x64.Build.0 = Debug|x64
+		{2791E339-04FB-44EF-9F92-C90131FE7772}.Release|Win32.ActiveCfg = Release|Win32
+		{2791E339-04FB-44EF-9F92-C90131FE7772}.Release|Win32.Build.0 = Release|Win32
+		{2791E339-04FB-44EF-9F92-C90131FE7772}.Release|x64.ActiveCfg = Release|x64
+		{2791E339-04FB-44EF-9F92-C90131FE7772}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

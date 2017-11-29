@@ -145,6 +145,7 @@
     <None Include="dibang.mdb">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="C:\Users\Think\source\repos\EasyPR\EasyPR.sln" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="gb.ico">
